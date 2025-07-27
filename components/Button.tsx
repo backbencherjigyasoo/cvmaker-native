@@ -1,18 +1,17 @@
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-
 const styles = StyleSheet.create({
   btn: {
-    width: '90%',
     padding: 10,
-    backgroundColor: "#4CAF50",
-    alignItems: "center",
-    borderRadius: 6
+    width: '90%',
+    backgroundColor: '#4CAF50',
+    borderRadius: 6,
   },
-  text:{
-    color: "white",
-    fontWeight: "bold"
-  }
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
 
 type CustomButtonProps = {

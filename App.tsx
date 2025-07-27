@@ -4,16 +4,22 @@ import {
   useColorScheme,
   View
 } from 'react-native';
-import CustomButton from './components/Button';
+import RenderCV from './pages/RenderCV';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CVForm from './pages/CVForm';
+import { RootStackParamList } from './pages/types';
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   return (
-    <View style={styles.container}>
-      <Text>I am doing great</Text>
-      <CustomButton label="Click me" onPress={() => console.log("I am clicked")}/>
-        
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={RenderCV}/>
+        <Stack.Screen name="Form" component={CVForm}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
