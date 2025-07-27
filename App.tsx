@@ -1,20 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import {
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View
+} from 'react-native';
+import CustomButton from './components/Button';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
+      <Text>I am doing great</Text>
+      <CustomButton label="Click me" onPress={() => console.log("I am clicked")}/>
+        
     </View>
   );
 }
@@ -22,6 +20,8 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
 });
 
