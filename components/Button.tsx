@@ -3,7 +3,6 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   btn: {
     padding: 10,
-    width: '90%',
     backgroundColor: '#4CAF50',
     borderRadius: 6,
   },

@@ -15,6 +15,7 @@ import Education from './Education';
 import Experience from './Experience';
 import SkillsProjects from './SkillsProjects';
 import Summary from './Summary';
+import CustomButton from '../components/Button';
 
 const CVForm = () => {
   const [step, setStep] = useState(1);
@@ -50,8 +51,8 @@ const CVForm = () => {
         </ScrollView>
 
         <View style={styles.buttonContainer}>
-          <Button title="Previous" onPress={handlePrevious} />
-          <Button title="Next" onPress={handleNext} />
+          <CustomButton label="Previous" onPress={handlePrevious} />
+          <CustomButton label="Next" onPress={handleNext} />
         </View>
       </View>
     </KeyboardAvoidingView>
