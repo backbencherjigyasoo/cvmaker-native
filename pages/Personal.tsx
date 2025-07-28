@@ -1,18 +1,44 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, TextInput, View, Image, Button } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Personal = () => {
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
+    photo: "",
   });
+
+  const handleImagePick = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        quality: 0.5,
+      },
+      response => {
+        if (!response.didCancel && response.assets && response.assets.length > 0) {
+          handleChange('photo', response.assets[0].uri || '');
+        }
+      }
+    );
+  };
 
   const handleChange = (key: string, value: string) => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.imageContainer}>
+        {form.photo ? (
+          <Image source={{ uri: form.photo }} style={styles.image} />
+        ) : (
+          <View style={styles.placeholder} />
+        )}
+        <Button title="Select Profile Photo" onPress={handleImagePick} />
+      </View>
+
       <TextInput
         style={styles.input}
         placeholder="Full Name"
@@ -43,11 +69,22 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
-  heading: {
-    fontSize: 18,
+  imageContainer: {
+    alignItems: 'center',
     marginBottom: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  },
+  placeholder: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#ccc',
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
@@ -57,5 +94,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
+
 
 export default Personal;
