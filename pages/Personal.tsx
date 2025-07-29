@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, TextInput, View, Image, Button } from 'react-native';
+import { ScrollView, StyleSheet, TextInput, View, Image, Button, Text } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { CVFormData } from './types';
 
-const Personal = () => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    photo: "",
-  });
+type PersonalProps = {
+  form: CVFormData;
+  setForm: React.Dispatch<React.SetStateAction<CVFormData>>;
+};
 
+const Personal: React.FC<PersonalProps> = ({ form, setForm }) => {
   const handleImagePick = () => {
     launchImageLibrary(
       {
@@ -24,15 +23,21 @@ const Personal = () => {
     );
   };
 
-  const handleChange = (key: string, value: string) => {
-    setForm(prev => ({ ...prev, [key]: value }));
+  const handleChange = (key: keyof CVFormData['personal'], value: string) => {
+    setForm(prev => ({
+      ...prev,
+      personal: {
+        ...prev.personal,
+        [key]: value,
+      },
+    }));
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.imageContainer}>
-        {form.photo ? (
-          <Image source={{ uri: form.photo }} style={styles.image} />
+        {form.personal.photo ? (
+          <Image source={{ uri: form.personal.photo }} style={styles.image} />
         ) : (
           <View style={styles.placeholder} />
         )}
@@ -42,7 +47,7 @@ const Personal = () => {
       <TextInput
         style={styles.input}
         placeholder="Full Name"
-        value={form.name}
+        value={form.personal.name}
         onChangeText={text => handleChange('name', text)}
       />
 
@@ -50,7 +55,7 @@ const Personal = () => {
         style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
-        value={form.email}
+        value={form.personal.email}
         onChangeText={text => handleChange('email', text)}
       />
 
@@ -58,9 +63,10 @@ const Personal = () => {
         style={styles.input}
         placeholder="Phone"
         keyboardType="phone-pad"
-        value={form.phone}
+        value={form.personal.phone}
         onChangeText={text => handleChange('phone', text)}
       />
+
     </ScrollView>
   );
 };
@@ -94,6 +100,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-
 
 export default Personal;
