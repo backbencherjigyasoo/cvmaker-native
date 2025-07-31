@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Home: undefined;
   Form: undefined;
+  "Your CV": undefined;
 };
 
 export type CVFormData = {

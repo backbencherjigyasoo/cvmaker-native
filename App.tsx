@@ -1,13 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View
-} from 'react-native';
-import RenderCV from './pages/RenderCV';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  StyleSheet
+} from 'react-native';
 import CVForm from './pages/CVForm';
+import CVPage from './pages/CVPage';
+import RenderCV from './pages/RenderCV';
 import { RootStackParamList } from './pages/types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -18,6 +16,7 @@ function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={RenderCV}/>
         <Stack.Screen name="Form" component={CVForm}/>
+        <Stack.Screen name="Your CV" component={CVPage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
